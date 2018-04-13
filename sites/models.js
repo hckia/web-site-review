@@ -1,0 +1,104 @@
+'use strict';
+//const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+/*
+
+Site schema
+https://repl.it/@hckia/URL-RegEx-Extractions-1
+we'll need this for extracting the url. still need to figure out how to do the schema and statics.
+use users/router.js and users/model.js as a template
+*/
+
+
+const SiteSchema = mongoose.Schema({
+	url: {type: String, required: true},
+	description: {type: String, required: true}
+});
+
+SiteSchema.methods.serialize = function() {
+  return {
+    url: this.url || '',
+    description: this.description || ''
+  };
+};
+
+SiteSchema.statics.extractDomain = function(url){
+  console.log("in static: " + url);
+  let matches = url.match(/(https?:\/\/)?(([a-zA-Z0-9]+\.)+)?([a-zA-Z0-9]+\.[a-zA-Z0-9]+)(\/|\?|$)/i);
+  //question mark makes the preceding token optional, for example (https?) means the s is not required.
+  // matches[0] == full string matched by regex
+  // matches[1] == first capture group (protocol)
+  console.log("testing protocol regex for http and https: "+url.match(/(https?)/i));
+  // matches[2] == second capture group (all subdomains)
+  console.log("testing  regex for ALL sub and apex domain: "+url.match(/(([a-zA-Z0-9]+\.)+)?([a-zA-Z0-9]+\.[a-zA-Z0-9]+)($)/i));
+  // matches[3] == third capture group (last subdomain)
+  // matches[4] == fourth capture group (domain and extension)
+  console.log("testing regex for apex: "+url.match(/([a-zA-Z0-9]+\.[a-zA-Z0-9]+)($)/i));
+  // matches[5] == fifth capture group (trailing slash or EOL)
+
+  /*
+Example of https://google.com/
+matches[0]https://google.com/
+matches[1]https
+matches[2]undefined
+matches[3]undefined
+matches[4]google.com
+matches[5]/
+  */
+
+ //  if(matches[0] != null){
+	// 	console.log("matches[0]" + matches[0]);
+	// }
+	// else {
+	// 	console.log("matches[0] is null")
+	// }
+  console.log("matches[0]" + matches[0]);
+  console.log("matches[1]" + matches[1]);
+  console.log("matches[2]" + matches[2]);
+  console.log("matches[3]" + matches[3]);
+  console.log("matches[4]" + matches[4]);
+  console.log("matches[5]" + matches[5]);
+//ISSUE
+  //problem - if a user doesn't put in a protocol, this return statement will lead to a typeError of null.
+
+  return {
+    protocol: matches[1],
+    subdomains: matches[2] && matches[2].slice(0, -1),
+    subdomain: matches[3] && matches[2].slice(0, -1),
+    domain: matches[4],
+    rest: matches[5],
+    matchedURL: matches[0],
+    TLD: matches[4] && matches[4].split('.')[1]
+  };
+};
+
+
+//my concern with Site.create is whether the req.body will contain more values than it should. doesn't this open it up to an attack?
+// SiteSchema.statics.findOrCreate = function (siteData) {
+// 	return new Promise(function (res, rej){
+// 		Site.find({url: siteData.url})
+// 		.then(function (site){
+// 			if(site){
+// 				return res(site);
+// 			}
+// 			else {
+// 				return new Error("No site found");
+// 			}
+// 		})
+// 		.catch(function (err) {
+// 			Site.create(siteData)
+// 			.then(function(newSite){
+// 				return res(newSite);
+// 			})
+// 			.catch(function(err){
+// 				return rej(err);
+// 			})
+// 		})
+// 	});
+// };
+
+const Site = mongoose.model('Site', SiteSchema);
+
+module.exports = {Site};
