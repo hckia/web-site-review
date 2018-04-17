@@ -11,13 +11,40 @@ const router = express.Router();
 const { router: authRouter, localStrategy, jwtStrategy } = require('../auth');
 
 const jsonParser = bodyParser.json();
-
+//https://jwt.io/ <-- may ened this later for grabbing username
 const jwtAuth = passport.authenticate('jwt', { session: false });
+var siteNum = 0;
+const numOfSites = 10;
+var skips = 0;
+
+function siteCounter() {
+  Site.count()
+  .exec(function(err, sites){
+    siteNum = sites;
+  })
+  console.log("Number of sites outside exec " + JSON.stringify(siteNum));
+}
+
+siteCounter();
+
+// see this on pagination - https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
+// https://www.hacksparrow.com/mongodb-pagination-using-skip.html
+router.get('/', jsonParser, (req,res) => {
+  console.log("Number of sites outside exec " + JSON.stringify(siteNum));
+  if(siteNum-skips > 10){
+    console.log("Number of sites outside exec " + JSON.stringify(siteNum));
+    skips = skips + numOfSites;
+    console.log("Skips value " + skips);
+  }
+  return Site.find().skip(skips).limit(numOfSites)
+    .then(sites => res.json(sites.map(site => site.serialize())))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
 
 router.post('/', jwtAuth, jsonParser, (req, res) => {
 	const requiredFields = ['url', 'description'];
 	const missingField = requiredFields.find(field => !(field in req.body));
-
+  console.log(req.user.firstName);
 	if (missingField) {
     return res.status(422).json({
       code: 422,

@@ -3,6 +3,10 @@ const { Strategy: LocalStrategy } = require('passport-local');
 
 // Assigns the Strategy export to the name JwtStrategy using object destructuring
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Assigning_to_new_variable_names
+
+// Alternative to Passport - https://github.com/auth0/node-jsonwebtoken
+// ask about Passport sessions, http://www.passportjs.org/docs/configure/
+// and https://stackoverflow.com/questions/9216185/nodejs-passport-display-username?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 
 const { User } = require('../users/models');
