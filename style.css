@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /*following margin 0 rule makes it expand across screen */
+  margin: 0;
+}
+
+header {
+  text-align: center;
+}
+
+nav {
+  background-color: red;
+}
+
+/*
+form container centers it, input width uses full length
+*/
+.formContainer {
+  margin: 0 auto;
+  width: 50%;
+}
+
+input {
+  width: 100%;
+}
+
+a {
+  display:block;
+  text-align: right;
+}

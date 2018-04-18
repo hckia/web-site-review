@@ -8,3 +8,7 @@ Need to apply this for client side
 https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 
 https://repl.it/@hckia/Form-Design
+
+https://gist.github.com/lanxan/2550185
+
+https://gist.github.com/diorahman/1520485
