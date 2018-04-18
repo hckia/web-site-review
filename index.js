@@ -1,17 +1,17 @@
 function sendData(firstName, lastName, userName, password){
   console.log("sendData fired")
-  // var data = {
-  //   "firstName": firstName,
-  //   "lastName": lastName,
-  //   "username": userName,
-  //   "password": password
-  // };
   var data = {
-    "firstName": "Bob",
-    "lastName": "Dohl",
-    "username": "BobDohl",
-    "password": "testing"
+    "firstName": firstName,
+    "lastName": lastName,
+    "username": userName,
+    "password": password
   };
+  // var data = {
+  //   "firstName": "Bob",
+  //   "lastName": "Dohl",
+  //   "username": "BobDohl",
+  //   "password": "testing"
+  // };
   // data.username = userName;
   // data.password = password;
   // data.firstName = firstName;
@@ -54,7 +54,8 @@ function getFormValues(event){
 function submitClicked(){
   $(".js-create-login").submit(event => {
     console.log("submit fired");
-    console.log($(event.currentTarget).find(".js-user-name").val());
+    // console.log($(event.currentTarget).find(".js-user-name").val());
+    console.log($(".js-user-name").val());
     // may not need event.preventDefault for this one...
     event.preventDefault();
     getFormValues(event);
