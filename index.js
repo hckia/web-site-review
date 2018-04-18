@@ -1,11 +1,12 @@
 function sendData(firstName, lastName, userName, password){
-  console.log("sendData fired")
-  var data = {
-    "firstName": firstName,
-    "lastName": lastName,
-    "username": userName,
-    "password": password
-  };
+  console.log("sendData fired");
+  console.log("firstName val " + firstName + "\n lastName val " + lastName + "\n userName val " + userName + "\n password val " + password);  
+  // var data = {
+  //   "username": userName,
+  //   "password": password,
+  //   "firstName": firstName,
+  //   "lastName": lastName
+  // };
   // var data = {
   //   "firstName": "Bob",
   //   "lastName": "Dohl",
@@ -16,18 +17,42 @@ function sendData(firstName, lastName, userName, password){
   // data.password = password;
   // data.firstName = firstName;
   // data.lastName = lastName;
-  console.log(data);
-  $.ajax({
+  // console.log(data);
+  // $.ajax({
+  //   url: 'http://localhost:8080/api/users',
+  //   type: 'POST',
+  //   data: JSON.stringify(data),
+  //     contentType: 'application/json; charset=utf-8',
+  //     success: function(data) {
+  //       console.log("success");
+  //       console.log(JSON.stringify(data));
+  //     }
+  // });
+  const getDataSettings = {
+    url: 'http://localhost:8080/api/users',
+    data: {
+    firstName: firstName,
+    lastName: lastName,
+    username: userName,
+    password: password
+  },
+    dataType: 'application/json',
     type: 'POST',
-    data: JSON.stringify(data),
-      contentType: 'application/json',
-      url: 'http://localhost:8080/api/users',
-      success: function(data) {
-        console.log("success");
-        console.log(JSON.stringify(data));
-      }
+    success: function(data) {
+      console.log("GREAT SUCCESS! ");
+      console.log(JSON.stringify(data));
+    }
+  };
+  console.log(getDataSettings);
+  $.ajax(getDataSettings).fail(function (jqXHR, text) {
+      console.log(JSON.stringify(jqXHR));
+      console.log(text);
   });
 }
+
+/* 
+
+*/
 function getFormValues(event){
   console.log("getFormValues fired");
   var firstName, lastName;
