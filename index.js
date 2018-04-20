@@ -28,26 +28,46 @@ function sendData(firstName, lastName, userName, password){
   //       console.log(JSON.stringify(data));
   //     }
   // });
-  const getDataSettings = {
+
+  axios({
+    method: 'post',
     url: 'http://localhost:8080/api/users',
     data: {
-    firstName: firstName,
-    lastName: lastName,
-    username: userName,
-    password: password
-  },
-    dataType: 'application/json',
-    type: 'POST',
-    success: function(data) {
-      console.log("GREAT SUCCESS! ");
-      console.log(JSON.stringify(data));
+      firstName: firstName,
+      lastName: lastName,
+      username: userName,
+      password: password
     }
-  };
-  console.log(getDataSettings);
-  $.ajax(getDataSettings).fail(function (jqXHR, text) {
-      console.log(JSON.stringify(jqXHR));
-      console.log(text);
-  });
+  })
+    .then(function(response) {
+      console.log(response);
+      return response;
+    })
+    .then(err => {
+      console.log(err);
+      return err;
+    })
+
+  // const getDataSettings = {
+  //   url: 'http://localhost:8080/api/users',
+  //   body: {
+  //   firstName: firstName,
+  //   lastName: lastName,
+  //   username: userName,
+  //   password: password
+  // },
+  //   dataType: 'application/json',
+  //   type: 'POST',
+  //   success: function(data) {
+  //     console.log("GREAT SUCCESS! ");
+  //     console.log(JSON.stringify(data));
+  //   }
+  // };
+  // console.log(getDataSettings);
+  // $.ajax(getDataSettings).fail(function (jqXHR, text) {
+  //     console.log(JSON.stringify(jqXHR));
+  //     console.log(text);
+  // });
 }
 
 /* 
