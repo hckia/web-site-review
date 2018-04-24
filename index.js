@@ -1,5 +1,5 @@
-function sendData(firstName, lastName, userName, password){
-  console.log("sendData fired");
+function sendSignUpData(firstName, lastName, userName, password){
+  console.log("sendSignUpData fired");
   console.log("firstName val " + firstName + "\n lastName val " + lastName + "\n userName val " + userName + "\n password val " + password);  
   // var data = {
   //   "username": userName,
@@ -70,11 +70,30 @@ function sendData(firstName, lastName, userName, password){
   // });
 }
 
+function sendLoginData(userName, password){
+  axios({
+    method: 'post',
+    url: 'http://localhost:8080/api/auth/login',
+    data: {
+      username: userName,
+      password: password
+    }
+  })
+    .then(function(response) {
+      console.log(response);
+      return response;
+    })
+    .then(err => {
+      console.log(err);
+      return err;
+    })
+}
+
 /* 
 
 */
-function getFormValues(event){
-  console.log("getFormValues fired");
+function getSignUpFormValues(event){
+  console.log("getSignUpFormValues fired");
   var firstName, lastName;
   var userName = $(event.currentTarget).find(".js-user-name").val();
   console.log($(".js-user-name").val());
@@ -85,7 +104,7 @@ function getFormValues(event){
     console.log("passwords match");
     firstName = $(event.currentTarget).find(".js-first-name").val();
     lastName = $(event.currentTarget).find(".js-last-name").val();
-    sendData(firstName, lastName, userName, password);
+    sendSignUpData(firstName, lastName, userName, password);
   }
   else {
     alert("password fields do not match");
@@ -96,14 +115,39 @@ function getFormValues(event){
   }
 }
 
+function getLoginFormValues(event){
+  console.log("getLoginFormValues fired");
+  var userName = $(event.currentTarget).find(".js-user-name").val();
+  console.log($(".js-user-name").val());
+  var password = $(event.currentTarget).find(".js-password").val();
+  if(userName !== '' || password !== ''){
+    sendLoginData(userName, password);
+  }
+  else {
+    alert('Please enter valid credentials');
+  }
+}
+
 function submitClicked(){
-  $(".js-create-login").submit(event => {
+  $(".js-login").submit(event => {
     console.log("submit fired");
     // console.log($(event.currentTarget).find(".js-user-name").val());
     console.log($(".js-user-name").val());
     // may not need event.preventDefault for this one...
     event.preventDefault();
-    getFormValues(event);
+    console.log("submit fired");
+    // console.log($(event.currentTarget).find(".js-user-name").val());
+    console.log($(".js-user-name").val());
+    // may not need event.preventDefault for this one...
+    console.log($(event.currentTarget).attr('id'))
+    event.preventDefault();
+    if($(event.currentTarget).attr('id') == 'signup') {
+        getSignUpFormValues(event);
+    }
+    else if($(event.currentTarget).attr('id') == 'login'){
+        //set up getLoginFormValues(event)
+        getLoginFormValues(event);
+    }
   });
 }
 
