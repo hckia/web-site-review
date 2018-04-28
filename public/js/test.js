@@ -1,4 +1,4 @@
-//const axios = require('axios');
+//const axios = require('axios'); //for when we want to test serverside outside of chai
 
 function testAxios(){
 	console.log(localStorage.getItem("goat_milk"));
