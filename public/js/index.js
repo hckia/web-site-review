@@ -71,6 +71,7 @@ function sendSignUpData(firstName, lastName, userName, password){
 }
 
 function sendLoginData(userName, password){
+  console.log("axios fired");
   axios({
     method: 'post',
     url: 'http://localhost:8080/api/auth/login',
@@ -81,6 +82,9 @@ function sendLoginData(userName, password){
   })
     .then(function(response) {
       console.log(response);
+      const authToken = response.data.authToken;
+      localStorage.setItem('goat_milk', authToken);
+      console.log(localStorage.getItem("goat_milk"));
       return response;
     })
     .then(err => {

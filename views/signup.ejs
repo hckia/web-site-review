@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Login to Web Site Review</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>Web Site Review sign up</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
@@ -17,21 +17,26 @@
     </header>
     <main>
       <div class="formContainer">
-      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">Review Window local storage as a possible solution to your problem.</a>
-        <form class="js-login" id="login">
+        <form class="js-login" id="signup">
           <fieldset>
+            First Name:<br>
+            <input type="text" id="firstName" class="js-first-name"><br>
+            Last Name:<br>
+            <input type="text" id="lastName" class="js-last-name"><br>
             Username:<br>
             <input type="text" id="userName" class="js-user-name"><br>
             Password:<br>
             <input type="password" id="password" class="js-password"><br>
+            Repeat Password:<br>
+            <input type="password" id="repeat-password" class="js-repeat-password"><br>
           </fieldset>
           <input type="submit" value="sign up"><br>
-          <a href="index.html">Not a user? Sign up!</a>
+          <a href="/login">already a user? Login</a>
         </form>
       </div>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>

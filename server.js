@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
+const path = require('path');
 
 // Here we use destructuring assignment with renaming so the two variables
 // called router (from ./users and ./auth) have different names
@@ -25,6 +26,12 @@ const app = express();
 // Logging
 app.use(morgan('common'));
 
+//path for static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+//enable ejs  
+app.set("view engine", "ejs");
+
 // CORS
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -44,6 +51,24 @@ app.use('/api/auth/', authRouter);
 app.use('/api/sites/', sitesRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
+
+app.get("/", function(req, res){
+  res.render("signup");
+});
+
+app.get("/login", function(req, res){
+  res.render("login");
+})
+
+app.get("/test", function(req,res){
+  res.render("test");
+})
+
+app.get("/style.css")
+
+app.get("/secret", function(req, res){
+  res.render("secret");
+});
 
 // A protected endpoint which needs a valid JWT to access it
 app.get('/api/protected', jwtAuth, (req, res) => {

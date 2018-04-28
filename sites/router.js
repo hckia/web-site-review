@@ -29,7 +29,7 @@ siteCounter();
 
 // see this on pagination - https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
 // https://www.hacksparrow.com/mongodb-pagination-using-skip.html
-router.get('/', jsonParser, (req,res) => {
+router.get('/',jwtAuth,jsonParser, (req,res) => {
   console.log("Number of sites outside exec " + JSON.stringify(siteNum));
   if(siteNum-skips > 10){
     console.log("Number of sites outside exec " + JSON.stringify(siteNum));
