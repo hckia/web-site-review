@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Login to Web Site Reviews</title>
+    <title>Web Site Reviews Home Page</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
@@ -17,16 +17,21 @@
     </header>
     <main>
       <div class="formContainer">
-        <form class="js-submit" id="login">
+        <a href="/signup">Want to add a site? Sign up!</a>
+      </div>
+      <div class="formContainer welcomePage" id="welcome">
+        <form class="js-submit" id="search">
           <fieldset>
-            Username:<br>
-            <input type="text" id="userName" class="js-user-name"><br>
-            Password:<br>
-            <input type="password" id="password" class="js-password"><br>
+            Search for a Site<br>
+            <input type="text" id="searchbox" class="js-search-box"><br>
           </fieldset>
-          <input type="submit" value="sign up"><br>
-          <a href="/signup">Not a user? Sign up!</a>
+          <input type="submit" value="Search for site"><br>
         </form>
+      </div>
+      <div class="formContainer result-container">
+        <button class="js-results-button">Show results</button>
+        <div class="results js-results">
+        </div>
       </div>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>

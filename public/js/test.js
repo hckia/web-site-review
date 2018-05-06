@@ -1,10 +1,10 @@
-//const axios = require('axios'); //for when we want to test serverside outside of chai
+//const axios = require('axios');
 
 function testAxios(){
-	console.log(localStorage.getItem("goat_milk"));
+	console.log(localStorage.getItem("sitRevAuth"));
 	axios.get('http://localhost:8080/api/sites',{
     //method: 'get',
-    headers: { Authorization: `Bearer ${localStorage.getItem("goat_milk")}`}
+    headers: { Authorization: `Bearer ${localStorage.getItem("sitRevAuth")}`}
   })
     .then(function(response) {
       //console.log(response.data[0])

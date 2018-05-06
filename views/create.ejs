@@ -3,29 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Login to Web Site Reviews</title>
+    <title>Add site</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
       <nav>
-        <a href="/login" id="js-login-logout">Login</a>
+        <a href="http://localhost:8080/login" id="js-login-logout">Login</a>
       </nav>
       <h1>
-        Web Site Reviews
+        Site Review
       </h1>
     </header>
     <main>
       <div class="formContainer">
-        <form class="js-submit" id="login">
+        <form class="js-login" id="addSite">
           <fieldset>
-            Username:<br>
-            <input type="text" id="userName" class="js-user-name"><br>
-            Password:<br>
-            <input type="password" id="password" class="js-password"><br>
+            Site Name:<br>
+            <input type="text" id="siteName" class="js-site-name"><br>
+            Site Description:<br>
+            <input type="text" id="siteDescription" class="js-site-description"><br>
           </fieldset>
           <input type="submit" value="sign up"><br>
-          <a href="/signup">Not a user? Sign up!</a>
+          <!-- <a href="/login">already a user? Login</a> -->
         </form>
       </div>
     </main>

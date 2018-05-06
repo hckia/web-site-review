@@ -1,6 +1,7 @@
 'use strict';
 //const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 mongoose.Promise = global.Promise;
 /*
@@ -14,7 +15,9 @@ use users/router.js and users/model.js as a template
 
 const SiteSchema = mongoose.Schema({
 	url: {type: String, required: true},
-	description: {type: String, required: true}
+	description: {type: String, required: true}/*,
+  user: {type: ObjectId, required: true},
+  votes: [{user: {type: ObjectId, required: true}, value: {type: Number, required: true}}] */
 });
 
 SiteSchema.methods.serialize = function() {
@@ -23,6 +26,10 @@ SiteSchema.methods.serialize = function() {
     description: this.description || ''
   };
 };
+
+// www.database.lookup.yahoo.com?foo=bar
+// https://www.debuggex.com/cheatsheet/regex/javascript
+
 
 SiteSchema.statics.extractDomain = function(url){
   console.log("in static: " + url);
@@ -47,13 +54,6 @@ matches[3]undefined
 matches[4]google.com
 matches[5]/
   */
-
- //  if(matches[0] != null){
-	// 	console.log("matches[0]" + matches[0]);
-	// }
-	// else {
-	// 	console.log("matches[0] is null")
-	// }
   console.log("matches[0]" + matches[0]);
   console.log("matches[1]" + matches[1]);
   console.log("matches[2]" + matches[2]);
