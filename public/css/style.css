@@ -32,8 +32,6 @@ header {
     margin-top: -10px;
     margin-bottom: 20px;
     padding:20px 30px;max-width:calc(100vw - 40px);
-/*    box-sizing:border-box;
-    position:relative;*/
   }
 
 @media screen and (max-width: 800px) {
@@ -46,8 +44,6 @@ header {
     margin-top: -10px;
     margin-bottom: 20px;
     padding:20px 30px;max-width:calc(100vw - 40px);
-/*    box-sizing:border-box;
-    position:relative;*/
   }
 }
 
@@ -61,15 +57,11 @@ header {
     margin-top: -10px;
     margin-bottom: 20px;
     padding:20px 30px;max-width:calc(100vw - 40px);
-/*    box-sizing:border-box;
-    position:relative;*/
   }
 }
 
 
 h2{
-/*  margin:10px 0;
-  padding-bottom:10px;*/
   width:180px;
   color:#78788c;
   border-bottom:3px solid #78788c

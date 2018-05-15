@@ -1,5 +1,4 @@
 'use strict';
-//const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -11,7 +10,6 @@ https://repl.it/@hckia/URL-RegEx-Extractions-1
 we'll need this for extracting the url. still need to figure out how to do the schema and statics.
 use users/router.js and users/model.js as a template
 */
-
 
 const SiteSchema = mongoose.Schema({
 	url: {type: String, required: true},

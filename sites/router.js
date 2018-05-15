@@ -13,23 +13,22 @@ const { router: authRouter, localStrategy, jwtStrategy } = require('../auth');
 const jsonParser = bodyParser.json();
 //https://jwt.io/ <-- may ened this later for grabbing username
 const jwtAuth = passport.authenticate('jwt', { session: false });
-var siteNum = 0;
+//var siteNum = 0;
 const numOfSites = 10;
 var skips = 0;
 
-function siteCounter() {
-  Site.count()
-  .exec(function(err, sites){
-    siteNum = sites;
-  })
-  console.log("Number of sites outside exec " + JSON.stringify(siteNum));
-}
+// function siteCounter() {
+//   Site.count()
+//   .exec(function(err, sites){
+//     siteNum = sites;
+//   })
+//   console.log("Number of sites outside exec " + JSON.stringify(siteNum));
+// }
 
-siteCounter();
+// siteCounter();
 
 // see this on pagination - https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
 // https://www.hacksparrow.com/mongodb-pagination-using-skip.html
-
 
 router.get('/:url',(req, res) => {
   //test this by adding this to your browser... http://websitereviewdomain.com/api/sites/google.com
@@ -41,23 +40,16 @@ router.get('/:url',(req, res) => {
   function siteList(sites){
     console.log("siteList function activated. url sample here: " + sites[0].url)
     console.log("The length of the sites found is... "+sites.length)
-    // i'm stuck at this point. if I do sitePayload as an array the first if statement inside my for returns "(node:8115) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined"
-    // if I do sitePayload as an object I get "(node:8155) UnhandledPromiseRejectionWarning: TypeError: sitePayload.push is not a function"
-    // If I do sitePayload as an object, but get rid of using a push function I also get (node:8247) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined.
     let sitePayload = {};
     for(let i = 0; i < sites.length; i++){
       const key = sites[i].url;
       if(key in sitePayload){
-        console.log("CONDITION MET!");
-      //instead of sites[i].description can we use this.description?
-        // newDescription[i] = sites[i].description;
+        console.log("Key exists in site payload");
         // console.log("New description for "+ sites[i] + "/n Description: " +newDescription[i]);
-        // sitePayload[sites[i].newDescription[i]];
         //console.log("Site Votes:  " + sites.votes[i]);
         var descriptionValue = {author: sites[i].author,description: sites[i].description}
         sitePayload[key].push(descriptionValue);
         console.log("new description added to site " + sitePayload[key]);
-        // var votesKey = "votes";
         console.log("Inside Votes Index "+  sitePayload[key]);
         var descriptions = sitePayload[key];
         descriptions.forEach(description =>{
@@ -80,7 +72,7 @@ router.get('/:url',(req, res) => {
   return Site.find({url: extractedSite})
   .then(sites => {
     sites = siteList(sites);
-    console.log("Inside Promise, here's the site value found " + JSON.stringify(sites)); //null
+    //console.log("Inside Promise, here's the site value found " + JSON.stringify(sites));
     if(sites == null){
       console.log("condition met site is null")
       // There is an existing user with the same username
@@ -94,36 +86,26 @@ router.get('/:url',(req, res) => {
     console.log("201 value of site " + sites)
     return res.status(201).json(sites);
   })
-  .catch(err => res.status(500).json({message: 'gateway error'})); //should be a 500
+  .catch(err => res.status(500).json({message: 'gateway error'}));
 })
 
-router.get('/',/*jwtAuth,*/jsonParser, (req,res) => {
+router.get('/',jsonParser, (req,res) => {
 
    function siteList(sites){
     console.log("siteList function activated. url sample here: " + sites[0].url)
     console.log("The length of the sites found is... "+sites.length)
-    // i'm stuck at this point. if I do sitePayload as an array the first if statement inside my for returns "(node:8115) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined"
-    // if I do sitePayload as an object I get "(node:8155) UnhandledPromiseRejectionWarning: TypeError: sitePayload.push is not a function"
-    // If I do sitePayload as an object, but get rid of using a push function I also get (node:8247) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined.
     let sitePayload = {};
     for(let i = 0; i < sites.length; i++){
       const key = sites[i].url;
       if(key in sitePayload){
-        console.log("CONDITION MET!");
-      //instead of sites[i].description can we use this.description?
-        // newDescription[i] = sites[i].description;
+        console.log("Key exists in site payload");
         // console.log("New description for "+ sites[i] + "/n Description: " +newDescription[i]);
-        // sitePayload[sites[i].newDescription[i]];
         //console.log("Values of sites in search of votes "+ sites)
-        // sites.forEach(site => {
-        //   site.votes?console.log("Site votes "+site.votes):console.log("nothing...");
-        // })
         var descriptionValue = {author: sites[i].author,description: sites[i].description, votes: sites[i].votes}
         sitePayload[key].push(descriptionValue);
-        console.log("Site added with new description " + sitePayload[key]);
-        console.log("new description added to site " + sitePayload[key]);
-        // var votesKey = "votes";
-        console.log("Inside Votes Index "+  sitePayload[key]);
+        //console.log("Site added with new description " + sitePayload[key]);
+        //console.log("new description added to site " + sitePayload[key]);
+        //console.log("Inside Votes Index "+  sitePayload[key]);
         var descriptions = sitePayload[key];
         descriptions.forEach(description =>{
           description.votes && description.votes.map(vote => {
@@ -146,28 +128,9 @@ router.get('/',/*jwtAuth,*/jsonParser, (req,res) => {
       sites = siteList(sites);
       console.log("SITE PAYLOADDD " + JSON.stringify(sites));
       //console.log("Users first name: " + req.user.firstName);
-      //commented out response says sites.map is not a function, current 201 shows on client side response.data.map is not a function.
-      return res.status(201).json(sites);// res.json(sites.map(site => site.serialize()))
+      return res.status(201).json(sites);
     });
-/* 
 
-{ _id: 5ad28d27d522cd34bbec1edd,
-    url: 'google.com',
-    description: 'flipflapp',
-    __v: 0 },
-  { _id: 5ad28ef52b3edf34de520fbc,
-    url: 'googly.com',
-    description: 'flipflapp',
-    __v: 0 },
-  { _id: 5ad28ef72b3edf34de520fbd,
-    url: 'googly.com',
-    description: 'flipflapp',
-    __v: 0 },
-*/
-
-  // return Site.find().skip(skips).limit(numOfSites)
-  //   .then(sites => res.json(sites.map(site => site.serialize())))
-  //   .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 router.post('/vote/',jwtAuth, jsonParser,(req, res) => {
@@ -175,19 +138,12 @@ router.post('/vote/',jwtAuth, jsonParser,(req, res) => {
   //req.param.value --> yep or nope.
   //req.body.value <-- if in payload and if body-parser (jsonParser var) is defined
   //req.user.firstName <-- if from server.
-  console.log(req.body);
+  //console.log(req.body);
   console.log("Voter: " + req.user.username);
   console.log("Vote: " + req.body.vote);
   console.log("url: " + req.body.url);
   console.log("author: " + req.body.author);
-  /* 
   console.log("Vote: " + req.body.vote);
-  Site.updateOne({url: 'thisisatest.com', author: 'billaybobbillybob'}, [0].votes[Number(req.body.vote)], function (err, res){
-    if(err) throw err;
-    console.log(res);
-  })
-  */
-  //var urlToUpdate = "thisisatest.com";//req.body.url;
   //console.log(Site.find().where('url', 'thisisatest.com'));
   var voter = req.user.username;
   var voted = req.body.vote;
@@ -197,8 +153,6 @@ router.post('/vote/',jwtAuth, jsonParser,(req, res) => {
   var author = req.body.author;
 
   var query = {url: url, author: author};
- // var paramToUpdate = {$push: {votes: castVote}};
-
 
   return Site.findOne(query).then(site => {
         console.log("SITES "+site);
@@ -246,32 +200,6 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
   console.log("whew! made it out of extractDomain function. Testing value of urlInfo " + JSON.stringify(urlInfo));
   const extractedSite = urlInfo.domain;
   console.log("Returning "+ extractedSite);
-
-  // var siteFound = true;
-  // //use this anonymous function to get any value from the database if it exists. If it does, return True, if it doesn't return false
-  // function siteFinder(extractedSite/*, callback*/){
-  //   Site.find().where("url", extractedSite)
-  //   .exec(function(err, sites) {
-  //     if(sites.length > 0) {
-  //       console.log("A matching site has been found boolian stays as " + siteFound);
-  //       for(var i=0; i < sites.length; i++){
-  //         var site = sites[i].url;
-  //         console.log("inside exec here's what we find for site " + i + " " +site);
-  //       };
-  //     }
-  //     else {
-  //       siteFound = false;
-  //       console.log("No matching site was found switching boolian to " + siteFound);
-  //     }
-  //     // console.log("INSIDE exec we use the count function on sites to get... " + sites.length);
-  //     // for(var i=0; i < sites.length; i++){
-  //     //     var site = sites[i].url;
-  //     //     console.log("inside exec here's what we find for site " + i + " " +site);
-  //     // };
-  //   });
-  //   return siteFound;
-  // }
-  // siteFinder(extractedSite);
   
   return Site.findOne({url: extractedSite, author: req.user.username})
   .then(site => {
@@ -309,17 +237,6 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
     }
     res.status(500).json({code: 500, message: err});
   });
-  // console.log("testing value of extractedSite: " + extractedSite);
-  // if (!Site.find({url: extractedSite})) {
-  //   console.log("condition met");
-  // 	Site.create({
-  // 		url: url,
-  // 		description: req.body.description
-  // 	});
-  // }
-  // else {
-  //   console.log("condition not met");
-  // }
 });
 
 module.exports = {router};
