@@ -1,44 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Web Site Dashboard</title>
+    <title>Web Site Review Dashboard</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
-    <header>
-      <nav>
-        <a href="/login" id="js-login-logout">Login</a>
+  <body role='document'>
+    <header role='banner'>
+      <nav role='navigation'>
+        <a href="/login" id="js-login-logout" role='link'>Login</a>
       </nav>
       <h1>
-        Site Review
+        Web Site Reviews Dashboard
       </h1>
     </header>
-    <main>
+    <div id="buffer"></div>
+    <main role='main' aria-live='assertive'>
       <div class="formContainer dashboard" id="dashboard">
-        <form class="js-submit" id="search">
-          <fieldset>
-            Search for a Site<br>
-            <input type="text" id="searchbox" class="js-search-box"><br>
-          </fieldset>
-          <input type="submit" value="Search for site"><br>
-        </form>
-        <form class="js-submit" id="addSite">
-          <fieldset>
-            Site Name:<br>
-            <input type="text" id="siteName" class="js-site-name"><br>
-            Site Description:<br>
-            <input type="text" id="siteDescription" class="js-site-description"><br>
-          </fieldset>
-          <input type="submit" value="Add a site"><br>
-        </form>
+        <section aria-label='search for a site'>
+          <form class="js-submit" id="search">
+            <fieldset>
+              <legend>Search for a site</legend>
+              <label for='searchbox'>Search for a Site</label>
+              <input type="text" id="searchbox" class="js-search-box"><br>
+            </fieldset>
+            <input type="submit" value="Search for site" role='button'><br>
+          </form>
+        </section>
+        <section aria-label='add a site'>
+          <form class="js-submit" id="addSite">
+            <fieldset>
+              <legend>Add a site</legend>
+              <label for='siteName'>Site Name:</label>
+              <input type="text" id="siteName" class="js-site-name"><br>
+              <label for='siteDescription'>Site Description:</label>
+              <input type="text" id="siteDescription" class="js-site-description"><br>
+            </fieldset>
+            <input type="submit" value="Add a site" role='button'><br>
+          </form>
+        </section>
       </div>
-      <div class="formContainer result-container">
-        <button class="js-results-button">Show results</button>
-        <div class="results js-results">
+      <section aria-label='see sites added to Web Site Review'>
+        <div class="formContainer result-container">
+          <button class="js-results-button" role='button'>Show results</button>
+          <div class="js-results">
+          </div>
         </div>
-      </div>
+      </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

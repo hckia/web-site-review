@@ -1,8 +1,8 @@
 //const axios = require('axios');
 
-function testAxios(){
+function showResults(){
 	console.log(localStorage.getItem("sitRevAuth"));
-	axios.get('http://localhost:8080/api/sites',{
+	axios.get('/api/sites',{
     //method: 'get',
     headers: { Authorization: `Bearer ${localStorage.getItem("sitRevAuth")}`}
   })
@@ -23,7 +23,7 @@ function testAxios(){
   // const getDataSetting
 }
 
-function buttonAxios(){
+function resultsButtonClicked(){
 	console.log("buttonAxios fired")
 	$("button").on("click", event => {
     $(".js-results").empty();

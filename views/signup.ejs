@@ -1,39 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Web Site Review sign up</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
-    <header>
-      <nav>
-        <a href="/login" id="js-login-logout">Login</a>
+  <body role='document'>
+    <header role='banner'>
+      <nav role='navigation'>
+        <a href="/login" id="js-login-logout" role='link'>Login</a>
       </nav>
       <h1>
-        Web Site Reviews
+        Web Site Review Sign up
       </h1>
     </header>
-    <main>
-      <div class="formContainer">
-        <form class="js-submit" id="signup">
-          <fieldset>
-            First Name:<br>
-            <input type="text" id="firstName" class="js-first-name"><br>
-            Last Name:<br>
-            <input type="text" id="lastName" class="js-last-name"><br>
-            Username:<br>
-            <input type="text" id="userName" class="js-user-name"><br>
-            Password:<br>
-            <input type="password" id="password" class="js-password"><br>
-            Repeat Password:<br>
-            <input type="password" id="repeat-password" class="js-repeat-password"><br>
-          </fieldset>
-          <input type="submit" value="sign up"><br>
-          <a href="/login">already a user? Login</a>
-        </form>
-      </div>
+    <div id="buffer"></div>
+    <main role='main' aria-live='assertive'>
+      <section role='sign up with Web Site Review!'>
+        <div class="formContainer">
+          <form class="js-submit" id="signup">
+            <fieldset>
+              <legend>Sign up</legend>
+              <label for='firstName'>First Name:</label>
+              <input type="text" id="firstName" class="js-first-name"><br>
+              <label for='lastName'>Last Name:</label>
+              <input type="text" id="lastName" class="js-last-name"><br>
+              <label for='userName'>Username:</label>
+              <input type="text" id="userName" class="js-user-name"><br>
+              <label for='password'>Password:</label>
+              <input type="password" id="password" class="js-password"><br>
+              <label for='repeat-password'>Repeat Password:</label>
+              <input type="password" id="repeat-password" class="js-repeat-password"><br>
+            </fieldset>
+            <input type="submit" value="sign up" role='button'><br>
+            <a href="/login" role='link'>already a user? Login</a>
+          </form>
+        </div>
+      </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

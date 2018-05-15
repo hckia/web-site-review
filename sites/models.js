@@ -15,9 +15,9 @@ use users/router.js and users/model.js as a template
 
 const SiteSchema = mongoose.Schema({
 	url: {type: String, required: true},
-	description: {type: String, required: true}/*,
-  user: {type: ObjectId, required: true},
-  votes: [{user: {type: ObjectId, required: true}, value: {type: Number, required: true}}] */
+	description: {type: String, required: true},
+  author: {type: String, required: true},
+  votes: [{user: {type: String, required: true}, value: {type: Number, required: true}}]
 });
 
 SiteSchema.methods.serialize = function() {
@@ -54,15 +54,13 @@ matches[3]undefined
 matches[4]google.com
 matches[5]/
   */
+
   console.log("matches[0]" + matches[0]);
   console.log("matches[1]" + matches[1]);
   console.log("matches[2]" + matches[2]);
   console.log("matches[3]" + matches[3]);
   console.log("matches[4]" + matches[4]);
   console.log("matches[5]" + matches[5]);
-//ISSUE
-  //problem - if a user doesn't put in a protocol, this return statement will lead to a typeError of null.
-
   return {
     protocol: matches[1],
     subdomains: matches[2] && matches[2].slice(0, -1),
@@ -73,31 +71,6 @@ matches[5]/
     TLD: matches[4] && matches[4].split('.')[1]
   };
 };
-
-
-//my concern with Site.create is whether the req.body will contain more values than it should. doesn't this open it up to an attack?
-// SiteSchema.statics.findOrCreate = function (siteData) {
-// 	return new Promise(function (res, rej){
-// 		Site.find({url: siteData.url})
-// 		.then(function (site){
-// 			if(site){
-// 				return res(site);
-// 			}
-// 			else {
-// 				return new Error("No site found");
-// 			}
-// 		})
-// 		.catch(function (err) {
-// 			Site.create(siteData)
-// 			.then(function(newSite){
-// 				return res(newSite);
-// 			})
-// 			.catch(function(err){
-// 				return rej(err);
-// 			})
-// 		})
-// 	});
-// };
 
 const Site = mongoose.model('Site', SiteSchema);
 

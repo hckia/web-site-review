@@ -32,71 +32,204 @@ siteCounter();
 
 
 router.get('/:url',(req, res) => {
-  //test this by adding this to your browser... http://localhost:8080/api/sites/google.com
+  //test this by adding this to your browser... http://websitereviewdomain.com/api/sites/google.com
   console.log("url get fired");
   console.log(req.params.url);
   const urlInfo = Site.extractDomain(req.params.url);
   const extractedSite = urlInfo.domain;
+
+  function siteList(sites){
+    console.log("siteList function activated. url sample here: " + sites[0].url)
+    console.log("The length of the sites found is... "+sites.length)
+    // i'm stuck at this point. if I do sitePayload as an array the first if statement inside my for returns "(node:8115) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined"
+    // if I do sitePayload as an object I get "(node:8155) UnhandledPromiseRejectionWarning: TypeError: sitePayload.push is not a function"
+    // If I do sitePayload as an object, but get rid of using a push function I also get (node:8247) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined.
+    let sitePayload = {};
+    for(let i = 0; i < sites.length; i++){
+      const key = sites[i].url;
+      if(key in sitePayload){
+        console.log("CONDITION MET!");
+      //instead of sites[i].description can we use this.description?
+        // newDescription[i] = sites[i].description;
+        // console.log("New description for "+ sites[i] + "/n Description: " +newDescription[i]);
+        // sitePayload[sites[i].newDescription[i]];
+        //console.log("Site Votes:  " + sites.votes[i]);
+        var descriptionValue = {author: sites[i].author,description: sites[i].description}
+        sitePayload[key].push(descriptionValue);
+        console.log("new description added to site " + sitePayload[key]);
+        // var votesKey = "votes";
+        console.log("Inside Votes Index "+  sitePayload[key]);
+        var descriptions = sitePayload[key];
+        descriptions.forEach(description =>{
+          description.votes && description.votes.map(vote => {
+            console.log("Value: " + vote.value);
+          })
+        })
+      }
+      else{
+        sitePayload[key] = [sites[i]];
+        console.log("Adding new site: " + sitePayload[key]);
+      }
+    }
+    console.log("Done. ")
+    //console.log(sites);
+    return sitePayload;
+  }
+
   //will require res.render("someejs") for this to not allow the browser to hang.
-  return Site.findOne({url: extractedSite})
-  .then(site => {
-    console.log("Inside Promise, here's the site found " + site);
-    if(!site){
+  return Site.find({url: extractedSite})
+  .then(sites => {
+    sites = siteList(sites);
+    console.log("Inside Promise, here's the site value found " + JSON.stringify(sites)); //null
+    if(sites == null){
+      console.log("condition met site is null")
       // There is an existing user with the same username
-      return Promise.reject({
-        code: 422,
-        reason: 'ValidationError',
-        message: 'Site already taken',
-        location: 'url'
-      });
+      return res.status(422).json({message: "Validation error: Site does not exist"});
     }
     // If there is no existing user, hash the password
-    console.log("before next part of Promise here's the value of site " + site);
-    return site;
+    console.log("before next part of Promise here's the value of site " + sites);
+    return sites;
   })
-  .then(site => {
-    console.log("201 value of site " + site)
-    return res.status(201).json(site);
+  .then(sites => {
+    console.log("201 value of site " + sites)
+    return res.status(201).json(sites);
   })
-  .catch(err => res.status(404).json({message: 'not found'})); //should be a 500
+  .catch(err => res.status(500).json({message: 'gateway error'})); //should be a 500
 })
 
 router.get('/',/*jwtAuth,*/jsonParser, (req,res) => {
-  // console.log(req.query.url);
-  //req.query.limit would be via query string (?limit=10)
-  //req.body.limit if we were to include it in payload
 
-  //pagination below
-  console.log("Number of sites outside exec " + JSON.stringify(siteNum));
-  if(siteNum-skips > 10){
-    console.log("Number of sites outside exec " + JSON.stringify(siteNum));
-    skips = skips + numOfSites;
-    console.log("Skips value " + skips);
+   function siteList(sites){
+    console.log("siteList function activated. url sample here: " + sites[0].url)
+    console.log("The length of the sites found is... "+sites.length)
+    // i'm stuck at this point. if I do sitePayload as an array the first if statement inside my for returns "(node:8115) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined"
+    // if I do sitePayload as an object I get "(node:8155) UnhandledPromiseRejectionWarning: TypeError: sitePayload.push is not a function"
+    // If I do sitePayload as an object, but get rid of using a push function I also get (node:8247) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'url' of undefined.
+    let sitePayload = {};
+    for(let i = 0; i < sites.length; i++){
+      const key = sites[i].url;
+      if(key in sitePayload){
+        console.log("CONDITION MET!");
+      //instead of sites[i].description can we use this.description?
+        // newDescription[i] = sites[i].description;
+        // console.log("New description for "+ sites[i] + "/n Description: " +newDescription[i]);
+        // sitePayload[sites[i].newDescription[i]];
+        //console.log("Values of sites in search of votes "+ sites)
+        // sites.forEach(site => {
+        //   site.votes?console.log("Site votes "+site.votes):console.log("nothing...");
+        // })
+        var descriptionValue = {author: sites[i].author,description: sites[i].description, votes: sites[i].votes}
+        sitePayload[key].push(descriptionValue);
+        console.log("Site added with new description " + sitePayload[key]);
+        console.log("new description added to site " + sitePayload[key]);
+        // var votesKey = "votes";
+        console.log("Inside Votes Index "+  sitePayload[key]);
+        var descriptions = sitePayload[key];
+        descriptions.forEach(description =>{
+          description.votes && description.votes.map(vote => {
+            console.log("Value: " + vote.value);
+          })
+        })
+      }
+      else{
+        sitePayload[key] = [sites[i]];
+        console.log("Adding new site: " + sitePayload[key]);
+      }
+    }
+    console.log("Done. ")
+    //console.log(sites);
+    return sitePayload;
   }
-  else if(siteNum-skips < 10){
-    console.log("siteNum-skips is less than 10. Value at " + JSON.stringify(siteNum-skips));
-    skips = skips + (siteNum-skips);
-  }
-  if(siteNum <= skips){
-    console.log("Resetting sentinel...");
-    skips = 0;
-  }
-  return Site.find().skip(skips).limit(numOfSites)
-    .then(sites => res.json(sites.map(site => site.serialize())))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+
+  return Site.find()
+    .then(sites => {
+      sites = siteList(sites);
+      console.log("SITE PAYLOADDD " + JSON.stringify(sites));
+      //console.log("Users first name: " + req.user.firstName);
+      //commented out response says sites.map is not a function, current 201 shows on client side response.data.map is not a function.
+      return res.status(201).json(sites);// res.json(sites.map(site => site.serialize()))
+    });
+/* 
+
+{ _id: 5ad28d27d522cd34bbec1edd,
+    url: 'google.com',
+    description: 'flipflapp',
+    __v: 0 },
+  { _id: 5ad28ef52b3edf34de520fbc,
+    url: 'googly.com',
+    description: 'flipflapp',
+    __v: 0 },
+  { _id: 5ad28ef72b3edf34de520fbd,
+    url: 'googly.com',
+    description: 'flipflapp',
+    __v: 0 },
+*/
+
+  // return Site.find().skip(skips).limit(numOfSites)
+  //   .then(sites => res.json(sites.map(site => site.serialize())))
+  //   .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-router.post('/:url/:username',jwtAuth,(req, res) => {
+router.post('/vote/',jwtAuth, jsonParser,(req, res) => {
   //this would be when we require...
-  //req.body.vote <-- if in payload
+  //req.param.value --> yep or nope.
+  //req.body.value <-- if in payload and if body-parser (jsonParser var) is defined
   //req.user.firstName <-- if from server.
+  console.log(req.body);
+  console.log("Voter: " + req.user.username);
+  console.log("Vote: " + req.body.vote);
+  console.log("url: " + req.body.url);
+  console.log("author: " + req.body.author);
+  /* 
+  console.log("Vote: " + req.body.vote);
+  Site.updateOne({url: 'thisisatest.com', author: 'billaybobbillybob'}, [0].votes[Number(req.body.vote)], function (err, res){
+    if(err) throw err;
+    console.log(res);
+  })
+  */
+  //var urlToUpdate = "thisisatest.com";//req.body.url;
+  //console.log(Site.find().where('url', 'thisisatest.com'));
+  var voter = req.user.username;
+  var voted = req.body.vote;
+  var castVote = {user: voter, value:voted};
+  var url = req.body.url;
+  console.log("var url: "+ url)
+  var author = req.body.author;
+
+  var query = {url: url, author: author};
+ // var paramToUpdate = {$push: {votes: castVote}};
+
+
+  return Site.findOne(query).then(site => {
+        console.log("SITES "+site);
+        console.log("voter "+ voter);
+        //console.log("first voter " + site.votes[0]);
+        let voteIndex = site.votes.findIndex(vote => vote.user == voter);
+        console.log("Site index " + voteIndex);
+        if(voteIndex >= 0 ){
+            site.votes[voteIndex] = castVote;
+            console.log(site.votes[voteIndex]);
+        } else {
+            site.votes.push(castVote);
+            console.log(site.votes[voteIndex]);
+        }
+        console.log("After array push sites value is... " + site);
+        return site.save();
+    })
+  .then(savedSite => {
+    return res.status(201).json({code: 201, message: 'voted'});
+  })
+   .catch(err => {
+    console.log(err);
+    return res.status(401).json({code: 401, message: err});
+   })
 })
 
 router.post('/', jwtAuth, jsonParser, (req, res) => {
 
 	const requiredFields = ['url', 'description'];
 	const missingField = requiredFields.find(field => !(field in req.body));
-  console.log(req.user.firstName);
+  console.log("Users username "+req.user.username);
 	if (missingField) {
     return res.status(422).json({
       code: 422,
@@ -140,7 +273,7 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
   // }
   // siteFinder(extractedSite);
   
-  return Site.findOne({url: extractedSite})
+  return Site.findOne({url: extractedSite, author: req.user.username})
   .then(site => {
     console.log("Inside Promise, here's the site found " + site);
     if(site){
@@ -157,9 +290,11 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
     return extractedSite;
   })
   .then(site => {
+    console.log(req.user.username);
     return Site.create({
       url: extractedSite,
-      description: req.body.description
+      description: req.body.description,
+      author: req.user.username
     });
   })
   .then(site => {
@@ -172,7 +307,7 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
     if (err.reason === 'ValidationError') {
       return res.status(err.code).json(err);
     }
-    res.status(500).json({code: 500, message: 'Internal server error'});
+    res.status(500).json({code: 500, message: err});
   });
   // console.log("testing value of extractedSite: " + extractedSite);
   // if (!Site.find({url: extractedSite})) {

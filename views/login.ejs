@@ -1,33 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Login to Web Site Reviews</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
-    <header>
-      <nav>
-        <a href="/login" id="js-login-logout">Login</a>
+  <body role='document'>
+    <header role='banner'>
+      <nav role='navigation'>
+        <a href="/login" id="js-login-logout" role='link'>Login</a>
       </nav>
       <h1>
-        Web Site Reviews
+        Web Site Reviews login
       </h1>
     </header>
-    <main>
-      <div class="formContainer">
-        <form class="js-submit" id="login">
-          <fieldset>
-            Username:<br>
-            <input type="text" id="userName" class="js-user-name"><br>
-            Password:<br>
-            <input type="password" id="password" class="js-password"><br>
-          </fieldset>
-          <input type="submit" value="sign up"><br>
-          <a href="/signup">Not a user? Sign up!</a>
-        </form>
-      </div>
+    <div id="buffer"></div>
+    <main role='main' aria-live='assertive'>
+      <section aria-label='Form to login'>
+        <div class="formContainer">
+          <form class="js-submit" id="login">
+            <fieldset>
+              <legend>Login</legend>
+              <label for='userName'>Username:</label>
+              <input type="text" id="userName" class="js-user-name"><br>
+              <label for='password'>Password:</label>
+              <input type="password" id="password" class="js-password"><br>
+            </fieldset>
+            <input type="submit" value="sign up" role='button'><br>
+            <a href="/signup" role='link'>Not a user? Sign up!</a>
+          </form>
+        </div>
+      </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
