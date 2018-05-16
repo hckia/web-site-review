@@ -42,6 +42,42 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
+  const sizedFields = {
+    username: {
+      min: 1
+    },
+    password: {
+      min: 10,
+      // bcrypt truncates after 72 characters, so let's not give the illusion
+      // of security by storing extra (unused) info
+      max: 72
+    }
+  };
+// TypeError: req.body[field].trim is not a function
+  const tooSmallField = Object.keys(sizedFields).find(
+    field =>
+      'min' in sizedFields[field] &&
+            req.body[field].trim().length < sizedFields[field].min
+  );
+  const tooLargeField = Object.keys(sizedFields).find(
+    field =>
+      'max' in sizedFields[field] &&
+            req.body[field].trim().length > sizedFields[field].max
+  );
+
+  if (tooSmallField || tooLargeField) {
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: tooSmallField
+        ? `Must be at least ${sizedFields[tooSmallField]
+          .min} characters long`
+        : `Must be at most ${sizedFields[tooLargeField]
+          .max} characters long`,
+      location: tooSmallField || tooLargeField
+    });
+  }
+
   var nonStringField;
   if(Number(req.body.firstName)){
     console.log("inside if statement for firstName and the data type is... " + typeof req.body.firstName);
@@ -54,6 +90,10 @@ router.post('/', jsonParser, (req, res) => {
   else if(Number(req.body.username)){
     console.log("inside if statement for username and the data type is...  " + typeof req.body.username);
     nonStringField = Number(req.body.username);
+  }
+  else if(Number(req.body.password)){
+    console.log("inside if statement for username and the data type is...  " + typeof req.body.password);
+    nonStringField = Number(req.body.password);   
   }
 
   console.log(nonStringField);
@@ -113,6 +153,6 @@ router.get('/', (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
-});
+}); 
 
 module.exports = {router};
