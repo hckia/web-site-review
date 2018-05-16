@@ -299,10 +299,14 @@ function addSite(event){
       })
       .then(function(response) {
         //console.log(response);
+        alert(`${siteName} added!` )//grapesofwrath.com
+        $(".js-site-name").val('');
+        $(".js-site-description").val('');
         return response;
       })
-      .then(err => {
+      .catch(err => {
         console.log(err);
+        alert(`You've already added ${siteName}`)
         return err;
       })
   }
