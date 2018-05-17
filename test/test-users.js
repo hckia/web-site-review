@@ -9,9 +9,6 @@ const { TEST_DATABASE_URL } = require('../config');
 
 const expect = chai.expect;
 
-// This let's us make HTTP requests
-// in our tests.
-// see: https://github.com/chaijs/chai-http
 chai.use(chaiHttp);
 
 describe('/api/user', function () {
@@ -196,60 +193,6 @@ describe('/api/user', function () {
             expect(res.body.location).to.equal('lastName');
           });
       });
-/*      it('Should reject users with non-trimmed username', function () {
-        return chai
-          .request(app)
-          .post('/api/users')
-          .send({
-            username: ` ${username} `,
-            password,
-            firstName,
-            lastName
-          })
-          .then(() =>
-            expect.fail(null, null, 'Request should not succeed')
-          )
-          .catch(err => {
-            if (err instanceof chai.AssertionError) {
-              throw err;
-            }
-
-            const res = err.response;
-            expect(res).to.have.status(422);
-            expect(res.body.reason).to.equal('ValidationError');
-            expect(res.body.message).to.equal(
-              'Cannot start or end with whitespace'
-            );
-            expect(res.body.location).to.equal('username');
-          });
-      }); */
-      /*it('Should reject users with non-trimmed password', function () {
-        return chai
-          .request(app)
-          .post('/api/users')
-          .send({
-            username,
-            password: ` ${password} `,
-            firstName,
-            lastName
-          })
-          .then(() =>
-            expect.fail(null, null, 'Request should not succeed')
-          )
-          .catch(err => {
-            if (err instanceof chai.AssertionError) {
-              throw err;
-            }
-
-            const res = err.response;
-            expect(res).to.have.status(422);
-            expect(res.body.reason).to.equal('ValidationError');
-            expect(res.body.message).to.equal(
-              'Cannot start or end with whitespace'
-            );
-            expect(res.body.location).to.equal('password');
-          });
-      });*/
       it('Should reject users with empty username', function () {
         return chai
           .request(app)

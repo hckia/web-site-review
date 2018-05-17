@@ -11,24 +11,9 @@ const router = express.Router();
 const { router: authRouter, localStrategy, jwtStrategy } = require('../auth');
 
 const jsonParser = bodyParser.json();
-//https://jwt.io/ <-- may ened this later for grabbing username
 const jwtAuth = passport.authenticate('jwt', { session: false });
-//var siteNum = 0;
 const numOfSites = 10;
 var skips = 0;
-
-// function siteCounter() {
-//   Site.count()
-//   .exec(function(err, sites){
-//     siteNum = sites;
-//   })
-//   console.log("Number of sites outside exec " + JSON.stringify(siteNum));
-// }
-
-// siteCounter();
-
-// see this on pagination - https://evdokimovm.github.io/javascript/nodejs/mongodb/pagination/expressjs/ejs/bootstrap/2017/08/20/create-pagination-with-nodejs-mongodb-express-and-ejs-step-by-step-from-scratch.html
-// https://www.hacksparrow.com/mongodb-pagination-using-skip.html
 
 router.get('/:url',(req, res) => {
   //test this by adding this to your browser... http://websitereviewdomain.com/api/sites/google.com
