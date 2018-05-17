@@ -52,7 +52,6 @@ app.use('/api/sites/', sitesRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-//need to implement this... https://stackoverflow.com/questions/824349/modify-the-url-without-reloading-the-page?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 app.get("/", function(req,res){
   res.render("welcome");
 })

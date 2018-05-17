@@ -42,6 +42,9 @@ describe('Site endpoint', function(){
   		return chai
   		.request(app)
   		.post('/api/sites')
+		.then(() =>
+		expect.fail(null, null, 'Request should not succeed')
+		)
   		.catch(err => {
   			if(err instanceof chai.AssertionError){
   				throw err;
@@ -57,6 +60,9 @@ describe('Site endpoint', function(){
   		.request(app)
   		.post('/api/sites')
   		.send({url: '', description, author})
+		.then(() =>
+		expect.fail(null, null, 'Request should not succeed')
+		)
   		.catch(err => {
   			if(err instanceof chai.AssertionError){
   				throw err;
@@ -72,6 +78,9 @@ describe('Site endpoint', function(){
   		.request(app)
   		.post('/api/sites')
   		.send({url, description: '', author})
+		.then(() =>
+		expect.fail(null, null, 'Request should not succeed')
+		)
   		.catch(err => {
   			if(err instanceof chai.AssertionError){
   				throw err;
@@ -119,6 +128,9 @@ describe('Vote endpoint', function(){
   	.request(app)
   	.post('/api/sites/vote')
   	.send({voter: undefined, voted: voted[0]})
+	.then(() =>
+	expect.fail(null, null, 'Request should not succeed')
+	)
 	.catch(err => {
 		if(err instanceof chai.AssertionError){
 			throw err;

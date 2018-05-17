@@ -29,7 +29,7 @@ router.get('/:url',(req, res) => {
     for(let i = 0; i < sites.length; i++){
       const key = sites[i].url;
       if(key in sitePayload){
-        console.log("Key exists in site payload");
+        //console.log("Key exists in site payload");
         // console.log("New description for "+ sites[i] + "/n Description: " +newDescription[i]);
         //console.log("Site Votes:  " + sites.votes[i]);
         var descriptionValue = {author: sites[i].author,description: sites[i].description}
@@ -39,13 +39,13 @@ router.get('/:url',(req, res) => {
         var descriptions = sitePayload[key];
         descriptions.forEach(description =>{
           description.votes && description.votes.map(vote => {
-            console.log("Value: " + vote.value);
+            //console.log("Value: " + vote.value);
           })
         })
       }
       else{
         sitePayload[key] = [sites[i]];
-        console.log("Adding new site: " + sitePayload[key]);
+        //console.log("Adding new site: " + sitePayload[key]);
       }
     }
     console.log("Done. ")
@@ -94,13 +94,13 @@ router.get('/',jsonParser, (req,res) => {
         var descriptions = sitePayload[key];
         descriptions.forEach(description =>{
           description.votes && description.votes.map(vote => {
-            console.log("Value: " + vote.value);
+            //console.log("Value: " + vote.value);
           })
         })
       }
       else{
         sitePayload[key] = [sites[i]];
-        console.log("Adding new site: " + sitePayload[key]);
+        //console.log("Adding new site: " + sitePayload[key]);
       }
     }
     console.log("Done. ")
@@ -111,7 +111,7 @@ router.get('/',jsonParser, (req,res) => {
   return Site.find()
     .then(sites => {
       sites = siteList(sites);
-      console.log("SITE PAYLOADDD " + JSON.stringify(sites));
+      //console.log("SITE PAYLOADDD " + JSON.stringify(sites));
       //console.log("Users first name: " + req.user.firstName);
       return res.status(201).json(sites);
     });
@@ -140,8 +140,8 @@ router.post('/vote/',jwtAuth, jsonParser,(req, res) => {
   var query = {url: url, author: author};
 
   return Site.findOne(query).then(site => {
-        console.log("SITES "+site);
-        console.log("voter "+ voter);
+        console.log("SITES: "+site);
+        console.log("voter: "+ voter);
         //console.log("first voter " + site.votes[0]);
         let voteIndex = site.votes.findIndex(vote => vote.user == voter);
         console.log("Site index " + voteIndex);
@@ -152,7 +152,7 @@ router.post('/vote/',jwtAuth, jsonParser,(req, res) => {
             site.votes.push(castVote);
             console.log(site.votes[voteIndex]);
         }
-        console.log("After array push sites value is... " + site);
+        //console.log("After array push sites value is... " + site);
         return site.save();
     })
   .then(savedSite => {
