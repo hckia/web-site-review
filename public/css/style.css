@@ -108,7 +108,7 @@ div > a{
 }
 
 .author{
-  display: hidden;
+  display: none;
 }
 
 legend {
