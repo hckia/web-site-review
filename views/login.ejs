@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width">
     <title>Login to Web Site Reviews</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Bowlby+One+SC" rel="stylesheet">
   </head>
   <body role='document'>
     <header role='banner'>
@@ -12,10 +15,13 @@
         <a href="/login" id="js-login-logout" role='link'>Login</a>
       </nav>
       <h1>
-        Web Site Reviews login
+        Web Site Reviews
       </h1>
+      <h3>
+        Your place to review, or find out what a site is all about!
+      </h3>
     </header>
-    <div id="buffer"></div>
+    <div class="buffer"></div>
     <main role='main' aria-live='assertive'>
       <section aria-label='Form to login'>
         <div class="formContainer">
@@ -31,10 +37,13 @@
             <a href="/signup" role='link'>Not a user? Sign up!</a>
           </form>
         </div>
+        <div class="buffer"></div>
+        <div id="dialog-username-password" title="Validation error">username and/or password are incorrect, or you haven't signed up yet!</div>
       </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

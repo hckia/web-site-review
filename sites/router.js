@@ -71,7 +71,7 @@ router.get('/:url',(req, res) => {
     console.log("201 value of site " + sites)
     return res.status(201).json(sites);
   })
-  .catch(err => res.status(500).json({message: 'gateway error'}));
+  .catch(err => res.status(404).json({message: 'site not found!'}));
 })
 
 router.get('/',jsonParser, (req,res) => {

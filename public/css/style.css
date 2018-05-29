@@ -5,20 +5,23 @@
 body {
   /*following margin 0 rule makes it expand across screen */
   font-family:'Montserrat',sans-serif;
-  background-color: #59ABE3;
+  background-color: #a0a0af;
   margin: 0;
+  background-image: url("website-review-background.jpg");
 }
 
 /*buffer and header are use to utilize a fixed position, and to pad the divs below which may overlap*/
 header {
+  font-family: 'Acme', sans-serif;
+  color: #fff;
   width: 100%;
-  background-color: #78788c;
+  background-color: #8989b7;
   text-align: center;
   box-shadow:0 0 40px -10px #000;
   position: fixed;
 }
 
-#buffer{
+.buffer{
   padding: 100px;
   maring-bottom: 100px;
 }
@@ -26,7 +29,7 @@ header {
 .formContainer{
     width:50%;
     background:#e6e6e6;
-    border-radius:8px;
+    border-radius:5px;
     box-shadow:0 0 40px -10px #000;
     margin:calc(50vh - 220px) auto;
     margin-top: -10px;
@@ -38,7 +41,7 @@ header {
 .formContainer{
     width:60%;
     background:#e6e6e6;
-    border-radius:8px;
+    border-radius:5px;
     box-shadow:0 0 40px -10px #000;
     margin:calc(50vh - 220px) auto;
     margin-top: -10px;
@@ -62,10 +65,20 @@ header {
 
 
 h2{
-  width:180px;
+  width:100%;
   color:#78788c;
   border-bottom:3px solid #78788c
 }
+
+h2 > a {
+  text-decoration: none;
+  text-align: left;
+}
+
+h3 {
+  margin-top: -15px;
+}
+
 
 input, button{
   width:100%;
@@ -79,29 +92,28 @@ input, button{
   border-bottom:2px solid #bebed2
 }
 
-  input:focus, button:focus{
-    border-bottom:2px solid #78788c
-  }
+input:focus, button:focus{
+  border-bottom:2px solid #78788c
+}
 
-  input:hover,button:hover{
-    border-radius:25px;
-    box-shadow:0 0 40px -10px #000;
-  }
+input:hover,button:hover{
+  border-radius:5px;
+  box-shadow:0 0 40px -10px #000;
+}
 
 a {
+  font-size: 20px;
   font-weight: bold;
   display:block;
   text-align: right;
 }
 div > a{
-  font-size: 20px;
   text-align: center;
 }
 
 .results{
-  border: 1px solid;
   box-shadow:0 0 40px -10px #000;
-  border-radius:25px;
+  border-radius:5px;
   padding: 5px;
   margin-top: 2.5px;
   margin-bottom: 2.5px;
@@ -127,7 +139,41 @@ label {
   font-weight: bold;
 }
 
+.describe {
+  font-size: 25px;
+  font-family: 'Acme', sans-serif;
+  color: #579181;
+}
+
 .js-vote {
   display: inline;
   width: 49%;
 }
+
+/*#dialog-404 {
+  color: #59ABE3;
+}*/
+
+/*notification header*/
+div.ui-dialog-titlebar.ui-corner-all.ui-widget-header {
+    background: #8989b7;
+    border: 1px solid #b9cd6d;
+    color: #FFFFFF;
+    font-weight: bold;
+ }
+
+/*ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog-buttons ui-draggable ui-resizable*/
+
+/*two below are to control the rest of the notification box*/
+div.ui-dialog {
+  background: #e6e6e6;
+}
+
+div.ui-dialog-buttonpane.ui-widget-content {
+  background: #e6e6e6;
+}
+
+.descirbe {
+  text-decoration: underline;
+}
+

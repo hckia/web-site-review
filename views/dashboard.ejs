@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width">
     <title>Web Site Review Dashboard</title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Bowlby+One+SC" rel="stylesheet">
   </head>
   <body role='document'>
     <header role='banner'>
@@ -14,8 +17,11 @@
       <h1>
         Web Site Reviews Dashboard
       </h1>
+      <h3>
+        Your place to review, or find out what a site is all about!
+      </h3>
     </header>
-    <div id="buffer"></div>
+    <div class="buffer"></div>
     <main role='main' aria-live='assertive'>
       <div class="formContainer dashboard" id="dashboard">
         <section aria-label='search for a site'>
@@ -44,13 +50,18 @@
       <section aria-label='see sites added to Web Site Review'>
         <div class="formContainer result-container">
           <button class="js-results-button" role='button'>Show results</button>
-          <div class="js-results">
-          </div>
+          <span class="results js-results">
+          </span>
         </div>
+        <div class="buffer"></div>
+        <div id="dialog-404" title="Site not found!">Please sign in and add your own review of this site!</div>
+        <div id="dialog-no-val" title="no site provided">Please search for a valid url</div>
+        <div id="dialog-no-add-val" title="no site and/or description provided">Please enter a site and/or Description!</div>
       </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

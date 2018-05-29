@@ -17,8 +17,10 @@ const { router: usersRouter } = require('./users');
 const { router: sitesRouter } = require('./sites');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
+// replace Mongoose's promise library with native Promises, like this http://mongoosejs.com/docs/4.x/docs/promises.html
 mongoose.Promise = global.Promise;
 
+//destructuring example...
 const { PORT, DATABASE_URL } = require('./config');
 
 const app = express();
