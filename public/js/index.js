@@ -295,6 +295,7 @@ function searchSite(event){
     //console.log("matches[3]" + matches[3]);
     //console.log("matches[4]" + matches[4]);
     //console.log("matches[5]" + matches[5]);
+    try {
     searchParam = matches[4];
     //console.log("searchParam After regex is " + searchParam);
     axios.get('/api/sites/' + searchParam,{
@@ -330,6 +331,20 @@ function searchSite(event){
         $(".js-search-box").val("");
         return err;
       })
+    }
+    catch(err) {
+        $("#dialog-404-bad").dialog({
+           autoOpen: false, 
+           hide: "puff",
+           show : "slide",
+           modal: true,
+           buttons: {
+              OK: function() {$(this).dialog("close");}
+           },
+        });
+        $("#dialog-404-bad").dialog("open");
+        $(".js-search-box").val("");
+    }
   }
 }
 
@@ -422,6 +437,7 @@ function hideDialogs(){
   $("#dialog-no-val").hide();
   $("#dialog-username-password").hide();
   $("#dialog-no-add-val").hide();
+  $("#dialog-404-bad").hide();
 }
 
 function startClient(){
