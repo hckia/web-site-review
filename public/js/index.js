@@ -373,7 +373,19 @@ function addSite(event){
       })
       .catch(err => {
         console.log(err);
-        alert(`You've already added ${siteName}`)
+        //dialog-add-fail
+        //alert(`Either you've already added ${siteName}, its an invalid site, or your description needs to be a little bit longer!`)
+        $("#dialog-add-fail").text(`Either you've already added "${siteName}", its an invalid site, or your description needs to be a little bit longer!`);
+        $("#dialog-add-fail").dialog({
+           autoOpen: false, 
+           hide: "puff",
+           show : "slide",
+           modal: true,
+           buttons: {
+              OK: function() {$(this).dialog("close");}
+           },
+        });
+        $("#dialog-add-fail").dialog("open");
         return err;
       })
   }
@@ -438,6 +450,7 @@ function hideDialogs(){
   $("#dialog-username-password").hide();
   $("#dialog-no-add-val").hide();
   $("#dialog-404-bad").hide();
+  $("#dialog-add-fail").hide();
 }
 
 function startClient(){
