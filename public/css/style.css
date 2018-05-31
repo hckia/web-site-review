@@ -144,6 +144,8 @@ input:hover,button:hover{
 }
 
 legend {
+  padding-top: 10px;
+  font-weight: bold;
   display: hidden;
 }
 
