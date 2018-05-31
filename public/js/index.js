@@ -386,7 +386,18 @@ function addSite(event){
       })
       .then(function(response) {
         //console.log(response);
-        alert(`${siteName} added!` )//grapesofwrath.com
+        //alert(`${siteName} added!` )
+        $('#dialog-site-added').text(`${siteName} added!`)
+        $("#dialog-site-added").dialog({
+           autoOpen: false, 
+           hide: "puff",
+           show : "slide",
+           modal: true,
+           buttons: {
+              OK: function() {$(this).dialog("close");}
+           },
+        });
+        $("#dialog-site-added").dialog("open");
         $(".js-site-name").val('');
         $(".js-site-description").val('');
         return response;
