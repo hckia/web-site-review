@@ -400,6 +400,7 @@ function addSite(event){
         $("#dialog-site-added").dialog("open");
         $(".js-site-name").val('');
         $(".js-site-description").val('');
+        showResults();
         return response;
       })
       .catch(err => {
@@ -484,10 +485,12 @@ function hideDialogs(){
   $("#dialog-add-fail").hide();
   $("#dialog-login").hide();
   $("#dialog-password-err").hide();
+  $("#dialog-site-added").hide();
 }
 
 function startClient(){
   //console.log("JQuery start!");
+  showResults();
   hideDialogs();
   loginCheck();
   submitClicked();

@@ -71,7 +71,7 @@ router.get('/:url',(req, res) => {
     console.log("201 value of site " + sites)
     return res.status(201).json(sites);
   })
-  .catch(err => res.status(404).json({message: 'site not found!'}));
+  .catch(err => res.status(404).json({message: 'site not found'}));
 })
 
 router.get('/',jsonParser, (req,res) => {
@@ -183,7 +183,7 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
   console.log("checking description value --> " + req.body.description);
   const urlInfo = Site.extractDomain(req.body.url);
   console.log("whew! made it out of extractDomain function. Testing value of urlInfo " + JSON.stringify(urlInfo));
-  const extractedSite = urlInfo.domain;
+  const extractedSite = urlInfo.domain.toLowerCase();
   console.log("Returning "+ extractedSite);
   
   return Site.findOne({url: extractedSite, author: req.user.username})
