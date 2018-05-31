@@ -42,32 +42,6 @@ fieldset {
     padding:20px 30px;max-width:calc(100vw - 40px);
   }
 
-@media screen and (max-width: 800px) {
-.formContainer{
-    width:60%;
-    background:#e6e6e6;
-    border-radius:5px;
-    box-shadow:0 0 40px -10px #000;
-    margin:calc(50vh - 220px) auto;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    padding:20px 30px;max-width:calc(100vw - 40px);
-  }
-}
-
-@media screen and (max-width: 600px) {
-.formContainer{
-    width:90%;
-    background:#e6e6e6;
-    border-radius:8px;
-    box-shadow:0 0 40px -10px #000;
-    margin:calc(50vh - 220px) auto;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    padding:20px 30px;max-width:calc(100vw - 40px);
-  }
-}
-
 h1 {
   margin-top: -15px;
 }
@@ -109,7 +83,6 @@ input, button{
   width:100%;
   padding:10px;
   box-sizing:border-box;
-  /*background:none;*/
   outline:none;
   resize:none;
   box-shadow:0 0 40px -10px #000;
@@ -167,9 +140,22 @@ label {
   color: #579181;
 }
 
+.score {
+  width: 100%;
+  height: auto;
+}
+
 .js-vote {
+  background:#DEDEDE;
   display: inline;
-  width: 49%;
+  width: 39%;
+  margin-left: 50px;
+  resize:both;
+}
+
+
+.js-vote > img {
+  width: 10%;
 }
 
 
@@ -196,3 +182,67 @@ div.ui-dialog-buttonpane.ui-widget-content {
   text-decoration: underline;
 }
 
+@media screen and (max-width: 1200px) {
+.js-vote {
+  background:#DEDEDE;
+  display: inline;
+  width: 35%;
+  margin-left: 25px;
+  resize:both;
+}
+
+
+.js-vote > img {
+  width: 15%;
+} 
+}
+
+@media screen and (max-width: 800px) {
+.formContainer{
+    width:60%;
+    background:#e6e6e6;
+    border-radius:5px;
+    box-shadow:0 0 40px -10px #000;
+    margin:calc(50vh - 220px) auto;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    padding:20px 30px;max-width:calc(100vw - 40px);
+  }
+.js-vote {
+  background:#DEDEDE;
+  display: inline;
+  width: 39%;
+  margin-left: 25px;
+  resize:both;
+}
+
+
+.js-vote > img {
+  width: 25%;
+}
+}
+
+@media screen and (max-width: 600px) {
+.formContainer{
+    width:90%;
+    background:#e6e6e6;
+    border-radius:8px;
+    box-shadow:0 0 40px -10px #000;
+    margin:calc(50vh - 220px) auto;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    padding:20px 30px;max-width:calc(100vw - 40px);
+  }
+.js-vote {
+  background:#DEDEDE;
+  display: inline;
+  width: 39%;
+  margin-left: 15px;
+  resize:both;
+}
+
+
+.js-vote > img {
+  width: 25%;
+}
+}

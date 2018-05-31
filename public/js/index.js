@@ -75,8 +75,8 @@ function renderSiteDescription(site){
   <span class='description' id='description-by-${site.author}' aria-label='A site description for ${site.url}'>"${site.description}"</span>
   <span class='author'>${site.author}</span>
   </br></br><label for='score-for-${site.author}-on-${site.url}'>Score: </label>
-  <span class='score' id='score-for-${site.author}-on-${site.url}'>${totalVotes}</span></br></br><button class="js-vote js-upvote" role='button'>upvote</button>
-  <button class="js-vote js-downvote" role='button'>downvote</button></br></br>`
+  <span class='score' id='score-for-${site.author}-on-${site.url}'>${totalVotes}</span></br></br><button class="js-vote js-upvote" role='button'><img src='../imgs/upvote.png' alt='upvote'></button>
+  <button class="js-vote js-downvote" role='button'><img src='../imgs/downvote.png' alt='upvote'></button></br></br>`
 }
 
 function renderSite(sites){
