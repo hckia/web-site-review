@@ -125,7 +125,7 @@ function resultsButtonClicked(){
   $(".js-results-button").on("click", event => {
     if(!resultsEvent){
       resultsEvent = true;
-      $(".js-results-button").text("Check for more sites");
+      $(".js-results-button").text("Refresh site list");
     }
     showResults();
   })
