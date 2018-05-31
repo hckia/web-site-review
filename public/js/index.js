@@ -475,6 +475,19 @@ function loginCheck(){
     }
 }
 
+function aboutSite(){
+    $("#dialog-about").dialog({
+       autoOpen: false,        
+       buttons: {
+          "GOT IT": function() {$(this).dialog("close");}
+       }
+    });
+    $("#js-intro").click(function(event) {
+        event.preventDefault();
+       $("#dialog-about").dialog( "open" );
+    });
+}
+
 function hideDialogs(){
   $("#dialog-404").hide();
   $("#dialog-validation-err").hide();
@@ -486,12 +499,14 @@ function hideDialogs(){
   $("#dialog-login").hide();
   $("#dialog-password-err").hide();
   $("#dialog-site-added").hide();
+  $("dialog-about").hide();
 }
 
 function startClient(){
   //console.log("JQuery start!");
   showResults();
   hideDialogs();
+  aboutSite();
   loginCheck();
   submitClicked();
   resultsButtonClicked();

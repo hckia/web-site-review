@@ -24,9 +24,12 @@
     <div class="buffer"></div>
     <main role='main' aria-live='assertive'>
       <section aria-label='sign up link'>
-        <div class="formContainer">          
+        <div class="formContainer">
+          <!-- <div class='signuplink'></div> -->
+          <a href='/' id='js-intro'>What's this site about?</a>
+          <div class='signuplink'></div>
           <a href="/signup" role='link'>Want to review a site? Sign up!</a>
-          <div id='signuplink'></div>
+          <!-- <div class='signuplink'></div> -->
         </div>
       </section>
       <section aria-label='search for a site'>
@@ -50,7 +53,8 @@
         <div id="dialog-404" title="Site not found!">Please sign in and add your own review of this site!</div>
         <div id="dialog-404-bad" title="bad url">Please add a complete url with a tld(top level domain) such as .com,.org,etc.</div>
         <div id="dialog-no-val" title="no site provided">Please search for a valid url</div>
-        <dir id="dialog-login" title="Log in to Vote">You're not logged in! Login in or sign up for web site review!</dir>
+        <div id="dialog-login" title="Log in to Vote">You're not logged in! Login in or sign up for web site review!</div>
+        <div id="dialog-about" title="About this site">The Web Site Reviews app lets you view, create, or vote on reviews created by members of our community. Whether the review is comedic, or serious it doesn't matter. Think of it as the urban dictionary of site reviews.</div>
       </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>

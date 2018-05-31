@@ -60,7 +60,7 @@ a {
   text-align: right;
 }
 
-#signuplink {
+.signuplink {
     background-color: #8989b7;
     width: 25%;
     height: 2px;
@@ -239,6 +239,11 @@ div.ui-dialog-buttonpane.ui-widget-content {
 .js-vote > img {
   width: 25%;
 }
+}
+
+#dialog-about {
+  font-family: 'Acme', sans-serif;
+  text-align: center;
 }
 
 @media screen and (max-width: 600px) {
