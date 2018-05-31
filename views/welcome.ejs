@@ -35,13 +35,13 @@
               <label for='searchbox'>Search our Community Reviewed Sites!</label>
               <input type="text" id="searchbox" class="js-search-box"><br>
             </fieldset>
-            <input type="submit" value="lets see if it has been reviewed!" role='button'><br>
+            <input type="submit" value="see if its been reviewed!" role='button' class="submitButton"><br>
           </form>
         </div>
       </section>
       <section aria-label='see sites added to Web Site Review'>
         <div class="formContainer result-container">
-          <button class="js-results-button" role='button'>Click here to see a list of reviewed sites!</button>
+          <button class="js-results-button submitButton" role='button'>Click here to see a list of reviewed sites!</button>
           <span class="results js-results">
           </span>
         </div>
@@ -49,6 +49,7 @@
         <div id="dialog-404" title="Site not found!">Please sign in and add your own review of this site!</div>
         <div id="dialog-404-bad" title="bad url">Please add a complete url with a tld(top level domain) such as .com,.org,etc.</div>
         <div id="dialog-no-val" title="no site provided">Please search for a valid url</div>
+        <dir id="dialog-login" title="Log in to Vote">You're not logged in! Login in or sign up for web site review!</dir>
       </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>

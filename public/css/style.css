@@ -125,6 +125,12 @@ input:hover,button:hover{
   border-radius:15px;
 }
 
+.submitButton {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%
+}
+
 .results{
   box-shadow:0 0 40px -10px #000;
   border-radius:5px;

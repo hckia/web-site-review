@@ -39,12 +39,13 @@
               <label for='repeat-password'>Repeat Password:</label>
               <input type="password" id="repeat-password" class="js-repeat-password"><br>
             </fieldset>
-            <input type="submit" value="sign up" role='button'><br>
+            <input type="submit" value="sign up" role='button' class="submitButton"><br>
             <a href="/login" role='link'>already a user? Login</a>
           </form>
         </div>
         <div class="buffer"></div>
         <div id="dialog-validation-err" title="Validation error">Seems there was a problem. Could be one of the following issues... <ul><li>Your username is taken</li><li>Your password is too long/short</li><li>Your passwords don't match</li><li>You've entered an empty string!</li></ul></div>
+        <div id="dialog-password-err" title="Password mismatch">password fields do not match</div>
       </section>
     </main>
     <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
