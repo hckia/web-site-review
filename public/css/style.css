@@ -22,6 +22,16 @@ header {
   position: fixed;
 }
 
+#headerLink {
+  color: #fff;
+  text-align: center;
+}
+
+#headerLink:hover {
+  color: #e6e6e6;
+  text-decoration: underline;
+}
+
 .buffer{
   padding: 100px;
   maring-bottom: 100px;
@@ -60,25 +70,6 @@ a {
   text-align: right;
 }
 
-.signuplink {
-    background-color: #8989b7;
-    width: 25%;
-    height: 2px;
-    position: relative;
-    animation-name: spot;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: normal;
-}
-
-@keyframes spot {
-    0%   {left:0px; top:0px;}
-    25%  {left: 25%; top:0px;}
-    50%  {left: 50%; top:0px;}
-    75% {left :75%; top: 0px;}
-    100% {left: 0%; top: 0px;}
-}
-
 a:hover {
   color: dodgerblue;
 }
@@ -98,11 +89,12 @@ h3 {
 }
 
 
+
 input, button{
   width:100%;
   padding:10px;
   box-sizing:border-box;
-  outline:none;
+  /*outline:none;*/
   resize:none;
   box-shadow:0 0 40px -10px #000;
   font-family:'Montserrat',sans-serif;transition:all .3s;
@@ -118,6 +110,7 @@ input:hover,button:hover{
 }
 
 .submitButton {
+  font-size: 18px;
   width: 50%;
   margin-left: 25%;
   margin-right: 25%
@@ -154,7 +147,7 @@ label {
 }
 
 .describe {
-  font-size: 25px;
+  font-size: 20px;
   font-family: 'Acme', sans-serif;
   color: #579181;
 }
@@ -213,11 +206,17 @@ div.ui-dialog-buttonpane.ui-widget-content {
 
 .js-vote > img {
   width: 15%;
-} 
+}
+  .submitButton {
+    font-size: 14px;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%
+  } 
 }
 
 @media screen and (max-width: 800px) {
-.formContainer{
+  .formContainer{
     width:60%;
     background:#e6e6e6;
     border-radius:5px;
@@ -227,23 +226,45 @@ div.ui-dialog-buttonpane.ui-widget-content {
     margin-bottom: 20px;
     padding:20px 30px;max-width:calc(100vw - 40px);
   }
-.js-vote {
-  background:#DEDEDE;
-  display: inline;
-  width: 39%;
-  margin-left: 25px;
-  resize:both;
-}
+  .js-vote {
+    background:#DEDEDE;
+    display: inline;
+    width: 39%;
+    margin-left: 25px;
+    resize:both;
+  }
 
 
-.js-vote > img {
-  width: 25%;
-}
+  .js-vote > img {
+    width: 25%;
+  }
+  .submitButton {
+    font-size: 12px;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%
+  }
 }
 
 #dialog-about {
   font-family: 'Acme', sans-serif;
   text-align: center;
+}
+
+#js-intro:focus {
+  height: auto;
+  animation-name: highlight;
+  animation-duration: 6s;
+  animation-iteration-count: 3;
+  animation-direction: normal;
+}
+
+@keyframes highlight {
+    0%   {color: dodgerblue; text-align: center; font-style: underline;}
+    25%  {color:#1ef3ff; text-align: center;font-style: underline;opacity: .8;}
+    50%  {color:dodgerblue; text-align: center;font-style: underline;}
+    75% {color:#1ef3ff; text-align: center;font-style: underline;opacity: .8;}
+    100% {color:dodgerblue; text-align: center;font-style: underline;}
 }
 
 @media screen and (max-width: 600px) {
@@ -270,3 +291,47 @@ div.ui-dialog-buttonpane.ui-widget-content {
   width: 25%;
 }
 }
+
+
+/*More decorative, arugably distracting header*/
+/*#headerLink:hover {
+  background-color: #8989b7;
+  height: auto;
+  animation-name: highlight;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+}
+
+@keyframes highlight {
+    0%   {color: dodgerblue; text-align: center; font-style: underline;}
+    25%  {color:#fff; text-align: center;font-style: underline;}
+    50%  {color:dodgerblue; text-align: center;font-style: underline;}
+    75% {color:#fff; text-align: center;font-style: underline;}
+    100% {color:dodgerblue; text-align: center;font-style: underline;}
+}*/
+
+/*Alternative method for bringing attention to */
+/*.signuplink {
+    background-color: #8989b7;
+    width: 25%;
+    height: 2px;
+    position: relative;
+    animation-name: spot;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+}
+
+@keyframes spot {
+    0%   {left:0px; top:0px;}
+    25%  {left: 25%; top:0px;}
+    50%  {left: 50%; top:0px;}
+    75% {left :75%; top: 0px;}
+    100% {left: 0%; top: 0px;}
+    0%   {width: 25%;}
+    25%  {width: 75%;}
+    50%  {width: 100%;}
+    75% {width: 75%;}
+    100% {width: 25%;}
+}*/

@@ -14,12 +14,14 @@
       <nav role='navigation'>
         <a href="/login" id="js-login-logout" role='link'>Login</a>
       </nav>
-      <h1>
-        Web Site Reviews
-      </h1>
-      <h3>
-        Your place to review, or find reviews on sites!
-      </h3>
+      <a href='./' id='headerLink'>
+        <h1>
+          Web Site Reviews
+        </h1>
+        <h3>
+          Your place to review, or find reviews on sites!
+        </h3>
+      </a>
     </header>
     <div class="buffer"></div>
     <main role='main' aria-live='assertive'>
@@ -44,7 +46,15 @@
           </form>
         </div>
         <div class="buffer"></div>
-        <div id="dialog-validation-err" title="Validation error">Seems there was a problem. Could be one of the following issues... <ul><li>Your username is taken</li><li>Your password is too long/short</li><li>Your passwords don't match</li><li>You've entered an empty string!</li></ul></div>
+        <div id="dialog-validation-err-firstname" title="First name error">Please enter your first name.</div>
+        <div id="dialog-validation-err-lastname" title="last name error">Please enter your last name.</div>
+        <div id="dialog-validation-err-username" title="FirstName error">Please enter your username.</div>
+        <div id="dialog-validation-err-password" title="FirstName error">Please enter your password.</div>
+        <div id="dialog-invalid-firstname" title="Invalid first name">Your first name must contain a character</div>
+        <div id="dialog-invalid-lastname" title="Invalid last name">Your last name must contain a character</div>
+        <div id="dialog-invalid-username" title="Invalid username">Your  username must contain a character</div>
+        <div id="dialog-username-taken" title="Username taken">We're sorry, but it appears that username has already been taken</div>
+        <div id="dialog-invalid-password" title="Invalid password">Your password must contain between 10 to 72 characters, or a combination of characters and numbers between that range.</div>
         <div id="dialog-password-err" title="Password mismatch">password fields do not match</div>
       </section>
     </main>

@@ -50,31 +50,55 @@ router.post('/', jsonParser, (req, res) => {
   if(Number(req.body.firstName)){
     console.log("inside if statement for firstName and the data type is... " + typeof req.body.firstName);
     nonStringField = Number(req.body.firstName);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string and got ${nonStringField}`,
+      location: "firstDigit"
+    });
   }
   else if(Number(req.body.lastName)){
     console.log("inside if statement for lastName and the data type is...  " + typeof req.body.lastName);
-    nonStringField = Number(req.body.lastName);    
+    nonStringField = Number(req.body.lastName);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string and got ${nonStringField}`,
+      location: "lastDigit"
+    });  
   }
   else if(Number(req.body.username)){
     console.log("inside if statement for username and the data type is...  " + typeof req.body.username);
     nonStringField = Number(req.body.username);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string and got ${nonStringField}`,
+      location: "userDigit"
+    });
   }
   else if(Number(req.body.password)){
     console.log("inside if statement for username and the data type is...  " + typeof req.body.password);
-    nonStringField = Number(req.body.password);   
+    nonStringField = Number(req.body.password);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string and got ${nonStringField}`,
+      location: "passDigit"
+    });
   }
 
   console.log(nonStringField);
 
-  if (nonStringField) {
-    console.log("condition met for nonStringField...")
-    return res.status(422).json({
-      code: 422,
-      reason: 'ValidationError',
-      message: 'Incorrect field type: expected string',
-      location: nonStringField
-    });
-  }
+  // if (nonStringField) {
+  //   console.log("condition met for nonStringField...")
+  //   return res.status(422).json({
+  //     code: 422,
+  //     reason: 'ValidationError',
+  //     message: 'Incorrect field type: expected string',
+  //     location: nonStringField
+  //   });
+  // }
 
   const sizedFields = {
     username: {
@@ -104,7 +128,8 @@ router.post('/', jsonParser, (req, res) => {
     return res.status(422).json({
       code: 422,
       reason: 'ValidationError',
-      message: tooSmallField
+      message: 'Password its too short or too long (Must be between 10 to 72 characters)',
+      location: "password"
     });
   }
 
@@ -112,31 +137,55 @@ router.post('/', jsonParser, (req, res) => {
   if(Number(req.body.firstName)){
     console.log("inside if statement for firstName and the data type is... " + typeof req.body.firstName);
     nonStringField = Number(req.body.firstName);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string, instead got ${nonStringField}`,
+      location: 'firstName'
+    });
   }
   else if(Number(req.body.lastName)){
     console.log("inside if statement for lastName and the data type is...  " + typeof req.body.lastName);
-    nonStringField = Number(req.body.lastName);    
+    nonStringField = Number(req.body.lastName);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string, instead got ${nonStringField}`,
+      location: 'lastName'
+    });    
   }
   else if(Number(req.body.username)){
     console.log("inside if statement for username and the data type is...  " + typeof req.body.username);
     nonStringField = Number(req.body.username);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string, instead got ${nonStringField}`,
+      location: 'username'
+    });
   }
   else if(Number(req.body.password)){
     console.log("inside if statement for username and the data type is...  " + typeof req.body.password);
-    nonStringField = Number(req.body.password);   
+    nonStringField = Number(req.body.password);
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: `Incorrect field type: expected string, instead got ${nonStringField}`,
+      location: 'password'
+    });
   }
 
   console.log(nonStringField);
 
-  if (nonStringField) {
-    console.log("condition met for nonStringField...")
-    return res.status(422).json({
-      code: 422,
-      reason: 'ValidationError',
-      message: 'Incorrect field type: expected string',
-      location: nonStringField
-    });
-  }
+  // if (nonStringField) {
+  //   console.log("condition met for nonStringField...")
+  //   return res.status(422).json({
+  //     code: 422,
+  //     reason: 'ValidationError',
+  //     message: 'Incorrect field type: expected string',
+  //     location: nonStringField
+  //   });
+  // }
 
   let {username, password, firstName = '', lastName = ''} = req.body;
 
@@ -149,7 +198,7 @@ router.post('/', jsonParser, (req, res) => {
           code: 422,
           reason: 'ValidationError',
           message: 'Username already taken',
-          location: 'username'
+          location: 'usernameTaken'
         });
       }
       // If there is no existing user, hash the password
