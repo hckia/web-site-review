@@ -20,7 +20,7 @@ router.get('/:url',(req, res) => {
   console.log("url get fired");
   console.log(req.params.url);
   const urlInfo = Site.extractDomain(req.params.url);
-  const extractedSite = urlInfo.domain;
+  const extractedSite = urlInfo.domain.toLowerCase();
 
   function siteList(sites){
     console.log("siteList function activated. url sample here: " + sites[0].url)
