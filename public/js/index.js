@@ -224,8 +224,6 @@ function sendSignUpData(firstName, lastName, userName, password){
          },
       });
       $(targetDialog).dialog("open");
-      $(".js-password").val("");
-      $(".js-repeat-password").val("");
       $(targetFocus).focus();
       return err;
     })
@@ -292,7 +290,21 @@ function getSignUpFormValues(event){
   var password = $(event.currentTarget).find(".js-password").val();
   var passRep = $(event.currentTarget).find(".js-repeat-password").val();
   //console.log("Password value " + password + "\n Password Repeat value " + passRep);
-  if(password == passRep){
+  if(password.length < 10){
+    //console.log("short")
+    $("#dialog-invalid-password").dialog({
+           autoOpen: false, 
+           hide: "puff",
+           show : "slide",
+           modal: true,
+           buttons: {
+              OK: function() {$(this).dialog("close"); $(".js-password").focus();}
+           },
+        });
+    $("#dialog-invalid-password").dialog("open");
+    $(".js-password").focus();
+  }
+  else if(password == passRep){
     //console.log("passwords match");
     firstName = $(event.currentTarget).find(".js-first-name").val();
     lastName = $(event.currentTarget).find(".js-last-name").val();
@@ -310,8 +322,6 @@ function getSignUpFormValues(event){
            },
         });
     $("#dialog-password-err").dialog("open");
-    $(".js-password").val("");
-    $(".js-repeat-password").val("");
     $(".js-password").focus();
     //console.log("passwords don't match");
   }
