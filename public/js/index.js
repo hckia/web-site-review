@@ -167,52 +167,52 @@ function sendSignUpData(firstName, lastName, userName, password){
       // alert("woops! Username must already exist, or the passwords don't match!");
       switch(locOfErr){
         case '"firstName"':
-          console.log("firstName");
+          //console.log("firstName");
           targetDialog = "#dialog-validation-err-firstname";
           targetFocus = ".js-first-name";
           break;
         case '"firstDigit"':
-          console.log("firstDigit");
+          //console.log("firstDigit");
           targetDialog = "#dialog-invalid-firstname";
           targetFocus = ".js-first-name";
           break;
         case '"lastName"':
-          console.log("lastName");
+          //console.log("lastName");
           targetDialog = "#dialog-validation-err-lastname";
           targetFocus = ".js-last-name";
           break;
         case '"lastDigit"':
-          console.log("lastDigit");
+          //console.log("lastDigit");
           targetDialog = "#dialog-invalid-lastname";
           targetFocus = ".js-last-name";
           break;
         case '"username"':
-          console.log("username");
+          //console.log("username");
           targetDialog = "#dialog-validation-err-username";
           targetFocus = ".js-user-name";
           break;
         case '"usernameTaken"':
-          console.log("usernameTaken");
+          //console.log("usernameTaken");
           targetDialog = "#dialog-username-taken";
           targetFocus = ".js-user-name";
           break;
         case '"userDigit"':
-          console.log("userDigit");
+          //console.log("userDigit");
           targetDialog = "#dialog-invalid-username";
           targetFocus = ".js-user-name";
           break;
         case '"password"':
-          console.log("password");
+          //console.log("password");
           targetDialog = "#dialog-validation-err-password";
           targetFocus = ".js-password";
           break;
         case '"passDigit"':
-          console.log("passDigit");
+          //console.log("passDigit");
           targetDialog = "#dialog-invalid-password";
           targetFocus = ".js-password";
           break;
         default:
-          console.log("derp");
+          //console.log("derp");
       }
       $(targetDialog).dialog({
          autoOpen: false, 
@@ -463,25 +463,25 @@ function addSite(event){
       // alert("woops! Username must already exist, or the passwords don't match!");
       switch(locOfErr){
         case '"url"':
-          console.log("doubly url");
+          //console.log("doubly url");
           targetDialog = "#dialog-add-site-fail";
           $(targetDialog).text(`"${siteName}" is in an invalid format!`);
           targetFocus = ".js-site-name";
           break;
         case '"urlTaken"':
-          console.log("url taken")
+          //console.log("url taken")
           targetDialog = "#dialog-add-site-taken";
           $(targetDialog).text(`You've already added "${siteName}"!`);
           targetFocus = ".js-site-name";
           break;
         case '"description"':
-          console.log("doubly description");
+          //console.log("doubly description");
           targetDialog = "#dialog-add-description-fail";
           $(targetDialog).text(`You need to add a site Descirption!`);
           targetFocus = ".js-site-description";
           break;
         default:
-          console.log("derp");
+//          console.log("derp");
       }
         $(targetDialog).dialog({
            autoOpen: false, 
