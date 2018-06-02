@@ -181,6 +181,22 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
 //  Site.findOrCreate(req.body); // related to static var in model.js
   console.log("In API: " + req.body.url);
   console.log("checking description value --> " + req.body.description);
+  if(!(req.body.url.includes('.'))){
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: 'Missing field or tld',
+      location: 'url'
+    });
+  }
+  else if(req.body.description == ''){
+    return res.status(422).json({
+      code: 422,
+      reason: 'ValidationError',
+      message: 'Missing field',
+      location: 'description'
+    });
+  }
   const urlInfo = Site.extractDomain(req.body.url);
   console.log("whew! made it out of extractDomain function. Testing value of urlInfo " + JSON.stringify(urlInfo));
   const extractedSite = urlInfo.domain.toLowerCase();
@@ -195,7 +211,7 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
         code: 422,
         reason: 'ValidationError',
         message: 'Site already taken',
-        location: 'url'
+        location: 'urlTaken'
       });
     }
     // If there is no existing user, hash the password
@@ -218,6 +234,7 @@ router.post('/', jwtAuth, jsonParser, (req, res) => {
     // Forward validation errors on to the client, otherwise give a 500
     // error because something unexpected has happened
     if (err.reason === 'ValidationError') {
+      console.log("ERR DOT REASON")
       return res.status(err.code).json(err);
     }
     res.status(500).json({code: 500, message: err});
