@@ -556,7 +556,7 @@ function loginCheck(){
       $("#js-login-logout").replaceWith("<a href='/logout' id='js-login-logout'>Logout</a>")
     }
     else if($('.dashboard').attr('id') == 'dashboard'){
-      alert("Please sign in ");
+      //alert("Please sign in ");
       window.location.href = "/login";
     }
 }
