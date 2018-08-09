@@ -1,4 +1,4 @@
-# Web Site Revieww App
+# Web Site Review App
 
 This Application allows people to sign up and review Web sites. It also allows users to up/down vote peoples review's of these sites.
 
