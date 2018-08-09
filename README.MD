@@ -7,6 +7,8 @@ This Application allows people to sign up and review Web sites. It also allows u
 
 [Link to Demo login info](https://github.com/hckia/web-site-review/blob/master/will-smith.md)
 
+![alt text](./imgs/website-review-screenshot.png "web site reviews screenshot")
+
 ## endpoints
 
 ### /api/users/
